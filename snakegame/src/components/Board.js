@@ -13,7 +13,6 @@ export default function Board({ handleKeyPress, hasGameStarted }) {
   const generateFood = () => {
     let x = Math.floor(Math.random() * 20 + 1); // Correct multiplication
     let y = Math.floor(Math.random() * 20 + 1);
-
     return { x, y };
   };
 
