@@ -1,9 +1,9 @@
-export default function Snake({pixel}){
+export default function Snake({pixel, index}){
     return <>
     
     <div className="snake"
-        style={{gridColumn: pixel.x,
-            gridRow:pixel.y
+        style={{gridColumn: pixel.y,
+            gridRow:pixel.x
         }}>  
 
        

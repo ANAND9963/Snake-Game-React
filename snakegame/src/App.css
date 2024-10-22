@@ -1,13 +1,15 @@
-.App {
+.app {
+  
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 0;
+  text-align: center;
+  
   height: 100vh;
-  width: 100vh;
+  width: 100vw;
   font-family: "VT323", monospace;
   overflow: hidden;
-
+background-color: rgb(75, 71, 71);
 }
 
 .App-logo {

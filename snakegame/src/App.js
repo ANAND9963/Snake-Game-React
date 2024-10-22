@@ -2,34 +2,40 @@
 import './App.css';
 import Board from './components/Board';
 
-import {useState, useEffect} from "react";
+import {useState} from "react";
 
 function App() {
 
 
 
   let [hasGameStarted,setHasGameStarted] = useState(false);
-  let[dir,setDir] = useState("right");
+  let[dir,setDir] = useState("Right");
   const handleKeyPress = (e) =>{
     // e.preventdefault();
-    console.log("came " ,e);
-
     if(e.key ===" " || e.key === "Space"){
      
       setHasGameStarted(true)
     }else {
       switch (e.key) {
         case "ArrowUp":
-          setDir = "up";
+          if(dir!=="Down"){
+            setDir("Up");
+          }
           break;
         case "ArrowDown":
-          setDir = "down";
+          if(dir!=="Up"){
+            setDir("Down"); 
+          }
           break;
         case "ArrowLeft":
-          setDir = "left";
+          if(dir!=="Right"){
+            setDir("Left");
+          }
           break;
         case "ArrowRight":
-          setDir = "right";
+          if(dir!=="Left"){
+            setDir("Right");
+          }
           break;
         default:
           break;
@@ -42,9 +48,11 @@ function App() {
 
   const stopGame =() =>{
     setHasGameStarted(false);
+    setDir("Right");
+  
   }
   return (
-    <div className="App" onKeyDown={handleKeyPress} tabIndex={"0"}>
+    <div className="app" onKeyDown={handleKeyPress} tabIndex={"0"}>
       
       <Board  hasGameStarted={hasGameStarted} stopGame={stopGame} dir ={dir} />
        
