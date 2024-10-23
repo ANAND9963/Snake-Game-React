@@ -29,12 +29,7 @@ steps:
     ArtifactName: 'html-artifacts'
     publishLocation: 'Container'
 
-# Step 1: Run any build or test steps as needed
-- script: |
-    echo "Building the project..."
-    npm install
-    npm run build
-  displayName: 'Install dependencies and build'
+
 
 # Step 2: Configure Git to push changes back to GitHub
 - script: |
