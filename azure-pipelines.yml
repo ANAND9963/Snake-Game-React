@@ -1,0 +1,48 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- main
+
+pool:
+  name: default;
+
+variables:
+  - group: main
+
+steps:
+
+- task: ArchiveFiles@2
+  inputs:
+    rootFolderOrFile: '$(Build.SourcesDirectory)'
+    includeRootFolder: false
+    archiveType: 'zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/html-artifacts.zip'
+    replaceExistingArchive: true
+
+# Publish the archived files as build artifacts
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+    ArtifactName: 'html-artifacts'
+    publishLocation: 'Container'
+
+# Step 1: Run any build or test steps as needed
+- script: |
+    echo "Building the project..."
+    npm install
+    npm run build
+  displayName: 'Install dependencies and build'
+
+# Step 2: Configure Git to push changes back to GitHub
+- script: |
+    git remote set-url origin https://$(gitUser):$(gitToken)@github.com/ANAND9963/Snake-Game-React.git
+    git add .
+    git commit -m "Auto-commit from Azure Pipeline"
+    git push origin HEAD:main
+  displayName: 'Push changes to GitHub'
+  env:
+    gitUser: $(gitUser)  # GitHub username, passed as a pipeline variable
+    gitToken: $(gitToken)
